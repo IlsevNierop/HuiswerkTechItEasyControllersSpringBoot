@@ -55,7 +55,7 @@ public class TelevisionsController {
             throw new IndexOutOfBoundsException("The TV with id number " + id + " does not exist");
         }
         televisionDataBase.set(id, null);
-        return new ResponseEntity<>("New list with televisions: " + televisionDataBase, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
