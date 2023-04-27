@@ -1,23 +1,30 @@
 package com.example.huiswerktechiteasycontrollerspringboot.controllers;
 
 import com.example.huiswerktechiteasycontrollerspringboot.exceptions.StringTooLongException;
+import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
+import com.example.huiswerktechiteasycontrollerspringboot.repositories.TelevisionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 @RestController
-@RequestMapping("/televisions")
-public class TelevisionsController {
+@RequestMapping("/televisionsold")
+public class TelevisionsControllerOld {
+
     public static ArrayList<String> televisionDataBase = new ArrayList<>(Arrays.asList("Philips 200", "Samsung 531", "Nikkei 1", "LG OLED TV", "Sony Bravia TV", "TCL Roku TV"));
 
     @GetMapping()
     public ResponseEntity<Object> getAllTelevisions() {
+        //old
         return new ResponseEntity<>(televisionDataBase, HttpStatus.OK);
     }
+
 
     // Gebruik voor id int, omdat ik de id als index gebruik. Begreep dat long netter is voor id.
     @GetMapping("/{id}")
