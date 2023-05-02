@@ -74,7 +74,7 @@ public class TelevisionController {
             throw new RecordNotFoundException("The television with id " + id + " doesn't exist.");
         }
         Television television = optionalTV.get();
-        // als de variabelen niet ingevuld worden in postman, dan wordt de nieuwe tv met 0, 0.0, null, of false (=default boolean) gevuld (afhankelijk van type variabele)
+        // als de variabelen niet ingevuld worden in postman, dan worden deze variabelen gevuld met de volgende waardes: 0, 0.0, null, of false (=default boolean) (afhankelijk van type variabele). Daarom eerst checken of de variabelen wel meegegeven worden in de body.
         if (t.getBrand() != null) {
             television.setBrand(t.getBrand());
         }
@@ -99,12 +99,22 @@ public class TelevisionController {
         if (t.getName() != null) {
             television.setScreenQuality(t.getScreenQuality());
         }
-        // Nu is het zo dat als een boolean niet wordt ingevuld in de waarde, dan wordt de default waarde false toegekend. Dit kun je oplossen aan de voorkant, door altijd de gehele body te vullen, ook als bepaalde variabelen niet aangepast zijn, dan vul je die variabelen met de originele waarde die uit de database kwam.
-        television.setSmartTv(t.isSmartTv());
-        television.setVoiceControl(t.isVoiceControl());
-        television.setHdr(t.isHdr());
-        television.setBluetooth(t.isBluetooth());
-        television.setAmbiLight(t.isAmbiLight());
+        // Door in de klasse niet boolean met kleine letter (=primitieve variabele die alleen true of false kan teruggeven), maar Boolean met hoofdletter (die kan ook null zijn) te gebruiken, kan je checken of die in de body zit.
+        if (t.getSmartTv() != null) {
+            television.setSmartTv(t.getSmartTv());
+        }
+        if (t.getVoiceControl() != null) {
+            television.setVoiceControl(t.getVoiceControl());
+        }
+        if (t.getHdr() != null) {
+            television.setHdr(t.getHdr());
+        }
+        if (t.getBluetooth() != null) {
+            television.setBluetooth(t.getBluetooth());
+        }
+        if (t.getAmbiLight() != null) {
+            television.setAmbiLight(t.getAmbiLight());
+        }
         if (t.getOriginalStock() != 0) {
             television.setOriginalStock(t.getOriginalStock());
         }
