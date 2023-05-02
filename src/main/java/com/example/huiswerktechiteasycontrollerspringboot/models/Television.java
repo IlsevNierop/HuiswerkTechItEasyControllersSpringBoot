@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 @Table(name = "televisions")
 @Getter
 @Setter
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Television {
 
     @Id
@@ -25,14 +24,11 @@ public class Television {
     private double refreshRate;
     private String screenType;
     private String screenQuality;
-
-    @JsonProperty(value = "smartTv")
-    @NotNull
-    private boolean smartTv;
-    private boolean voiceControl;
-    private boolean hdr;
-    private boolean bluetooth;
-    private boolean ambiLight;
+    private Boolean smartTv;
+    private Boolean voiceControl;
+    private Boolean hdr;
+    private Boolean bluetooth;
+    private Boolean ambiLight;
     private int originalStock;
     private int sold;
 
