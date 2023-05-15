@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
-import org.springframework.beans.BeanUtils;
+
 
 public class TelevisionInputDto {
 
@@ -14,7 +14,7 @@ public class TelevisionInputDto {
     public String type;
     @NotBlank(message = "Brand can't be blank")
     public String brand;
-    @Size(message = "Name cannot have more characters than 20.")
+    @Size(max=20,message = "Name cannot have more characters than 20.")
     public String name;
 
     @PositiveOrZero(message="Price needs to be zero or higher, can't be negative")
@@ -35,9 +35,6 @@ public class TelevisionInputDto {
     @PositiveOrZero(message="Sold needs to be zero or higher, can't be negative")
     public int sold;
 
-    public void copyProperties(Television target){
-        BeanUtils.copyProperties(this, target);
-    }
 
 
 }

@@ -23,6 +23,6 @@ public class TelevisionOutputDto {
     public int sold;
 
     public void copyProperties(Television target){
-        BeanUtils.copyProperties(target, this);
+        BeanUtils.copyProperties(this, target);
     }
 }
