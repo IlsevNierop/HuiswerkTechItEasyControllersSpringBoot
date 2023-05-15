@@ -30,7 +30,7 @@ public class TelevisionsController {
     @PostMapping("/add")
     public ResponseEntity<Object> addTelevision(@RequestBody String television) throws StringTooLongException {
         if (television.length() > 20) {
-            throw new StringTooLongException("The television name is too long. The name of a TV can have a maximum of 20 characters.");
+            throw new StringTooLongException("The television name " + television + " is too long. The name of a TV can have a maximum of 20 characters.");
         }
         televisionDataBase.add(television);
         return new ResponseEntity<>("New list with televisions: "+televisionDataBase, HttpStatus.CREATED);
