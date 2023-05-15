@@ -61,7 +61,6 @@ public class TelevisionController {
             return ResponseEntity.badRequest().body(errorToStringHandling(bindingResult));
         }
         TelevisionOutputDto televisionOutputDto = televisionService.createTelevision(televisionInputDto);
-//        Television television = televisionService.createTelevision(televisionInputDto);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + televisionOutputDto).toUriString());
         return ResponseEntity.created(uri).body(televisionOutputDto);
     }
@@ -76,7 +75,7 @@ public class TelevisionController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteTelevision(@PathVariable Long id) {
+    public ResponseEntity<HttpStatus> deleteTelevision(@PathVariable Long id) {
         televisionService.deleteTelevision(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
