@@ -7,8 +7,13 @@ import com.example.huiswerktechiteasycontrollerspringboot.models.RemoteControlle
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
 import com.example.huiswerktechiteasycontrollerspringboot.repositories.RemoteControllerRepository;
 import com.example.huiswerktechiteasycontrollerspringboot.repositories.TelevisionRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +93,15 @@ public class TelevisionService {
         return televisionOutputDto;
     }
 
+    public TelevisionOutputDto assignRemoteControllerToTelevision(Long id,Long remoteControllerId) {
+        Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television with id " + id + " doesn't exist"));
+        RemoteController remoteController = remoteControllerRepository.findById(remoteControllerId).orElseThrow(() -> new RecordNotFoundException("RemoteController with id " + remoteControllerId + " doesn't exist"));
+        television.setRemoteController(remoteController);
+        televisionRepository.save(television);
+
+        return transferTelevisionModelToOutputDto(television);
+    }
+
     public TelevisionOutputDto updateTelevision(Long id, TelevisionInputDto televisionInputDto)  throws RecordNotFoundException {
         Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television with id " + id + " doesn't exist"));
         // als de variabelen niet ingevuld worden in client side, dan worden deze variabelen gevuld met de volgende waardes: 0, 0.0, null, of false (=default boolean) (afhankelijk van type variabele). Daarom eerst checken of de variabelen wel meegegeven worden in de body.
@@ -155,8 +169,13 @@ public class TelevisionService {
 
 
 
-    public Television transferInputDtoToTelevisionModel(TelevisionInputDto televisionInputDto){
+    public Television transferInputDtoToTelevisionModel(TelevisionInputDto televisionInputDto) throws RecordNotFoundException {
         Television television = new Television();
+        if (televisionInputDto.remoteControllerId != null) {
+            RemoteController remoteController = remoteControllerRepository.findById(televisionInputDto.remoteControllerId).orElseThrow(() -> new RecordNotFoundException("RemoteController with id " + televisionInputDto.remoteControllerId + " doesn't exist"));
+            television.setRemoteController(remoteController);
+        }
+
         television.setType(televisionInputDto.type);
         television.setBrand(televisionInputDto.brand);
         television.setName(televisionInputDto.name);
@@ -172,8 +191,7 @@ public class TelevisionService {
         television.setAmbiLight(televisionInputDto.ambiLight);
         television.setOriginalStock(televisionInputDto.originalStock);
         television.setSold(televisionInputDto.sold);
-        RemoteController remoteController = remoteControllerRepository.findById(televisionInputDto.remoteControllerId).get();
-        television.setRemoteController(remoteController);
+
 
         return television;
     }
@@ -195,7 +213,9 @@ public class TelevisionService {
         televisionOutputDto.ambiLight = television.getAmbiLight();
         televisionOutputDto.originalStock = television.getOriginalStock();
         televisionOutputDto.sold = television.getSold();
-        televisionOutputDto.remoteControllerName = television.getRemoteController().getName();
+        if (television.getRemoteController() != null) {
+            televisionOutputDto.remoteControllerName = television.getRemoteController().getName();
+        }
 
         return televisionOutputDto;
 

@@ -70,6 +70,10 @@ public class TelevisionController {
         }
         return new ResponseEntity<>(televisionService.updateTelevision(id, televisionInputDto), HttpStatus.ACCEPTED);
     }
+    @PutMapping("/{id}/{remotecontrollerid}")
+    public ResponseEntity<Object> assignRemoteControllerToTelevision(@PathVariable("id") Long id, @PathVariable("remotecontrollerid") Long remoteControllerId) {
+        return new ResponseEntity<>(televisionService.assignRemoteControllerToTelevision(id, remoteControllerId), HttpStatus.ACCEPTED);
+    }
 
 
     @DeleteMapping("/{id}")
