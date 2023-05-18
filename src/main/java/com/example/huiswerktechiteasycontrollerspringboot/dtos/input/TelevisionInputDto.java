@@ -1,4 +1,4 @@
-package com.example.huiswerktechiteasycontrollerspringboot.dtos;
+package com.example.huiswerktechiteasycontrollerspringboot.dtos.input;
 
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
 import com.fasterxml.jackson.databind.util.BeanUtil;

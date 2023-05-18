@@ -1,9 +1,7 @@
 package com.example.huiswerktechiteasycontrollerspringboot.controllers;
 
-import com.example.huiswerktechiteasycontrollerspringboot.dtos.TelevisionInputDto;
-import com.example.huiswerktechiteasycontrollerspringboot.dtos.TelevisionOutputDto;
-import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
-import com.example.huiswerktechiteasycontrollerspringboot.services.TelevisionService;
+import com.example.huiswerktechiteasycontrollerspringboot.dtos.input.TelevisionInputDto;
+import com.example.huiswerktechiteasycontrollerspringboot.dtos.output.TelevisionOutputDto;
 import com.example.huiswerktechiteasycontrollerspringboot.services.TelevisionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.example.huiswerktechiteasycontrollerspringboot.services;
 
-import com.example.huiswerktechiteasycontrollerspringboot.dtos.TelevisionInputDto;
-import com.example.huiswerktechiteasycontrollerspringboot.dtos.TelevisionOutputDto;
+import com.example.huiswerktechiteasycontrollerspringboot.dtos.input.TelevisionInputDto;
+import com.example.huiswerktechiteasycontrollerspringboot.dtos.output.TelevisionOutputDto;
 import com.example.huiswerktechiteasycontrollerspringboot.exceptions.RecordNotFoundException;
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
 import com.example.huiswerktechiteasycontrollerspringboot.repositories.TelevisionRepository;

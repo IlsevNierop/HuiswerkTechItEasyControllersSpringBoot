@@ -1,4 +1,4 @@
-package com.example.huiswerktechiteasycontrollerspringboot.dtos;
+package com.example.huiswerktechiteasycontrollerspringboot.dtos.output;
 
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
 import org.springframework.beans.BeanUtils;
