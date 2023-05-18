@@ -9,4 +9,6 @@ public class RemoteControllerOutputDto {
     public String brand;
     public double price;
     public int originalStock;
+
+    public String televisionName;
 }

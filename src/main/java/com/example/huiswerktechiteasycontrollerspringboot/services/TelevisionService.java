@@ -3,7 +3,9 @@ package com.example.huiswerktechiteasycontrollerspringboot.services;
 import com.example.huiswerktechiteasycontrollerspringboot.dtos.input.TelevisionInputDto;
 import com.example.huiswerktechiteasycontrollerspringboot.dtos.output.TelevisionOutputDto;
 import com.example.huiswerktechiteasycontrollerspringboot.exceptions.RecordNotFoundException;
+import com.example.huiswerktechiteasycontrollerspringboot.models.RemoteController;
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
+import com.example.huiswerktechiteasycontrollerspringboot.repositories.RemoteControllerRepository;
 import com.example.huiswerktechiteasycontrollerspringboot.repositories.TelevisionRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,11 @@ import java.util.List;
 public class TelevisionService {
 
     private final TelevisionRepository televisionRepository;
+    private final RemoteControllerRepository remoteControllerRepository;
 
-    public TelevisionService(TelevisionRepository televisionRepository) {
+    public TelevisionService(TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository) {
         this.televisionRepository = televisionRepository;
+        this.remoteControllerRepository = remoteControllerRepository;
     }
 
     public List<TelevisionOutputDto> getAllTelevisions() throws RecordNotFoundException{
@@ -168,6 +172,8 @@ public class TelevisionService {
         television.setAmbiLight(televisionInputDto.ambiLight);
         television.setOriginalStock(televisionInputDto.originalStock);
         television.setSold(televisionInputDto.sold);
+        RemoteController remoteController = remoteControllerRepository.findById(televisionInputDto.remoteControllerId).get();
+        television.setRemoteController(remoteController);
 
         return television;
     }
@@ -189,6 +195,7 @@ public class TelevisionService {
         televisionOutputDto.ambiLight = television.getAmbiLight();
         televisionOutputDto.originalStock = television.getOriginalStock();
         televisionOutputDto.sold = television.getSold();
+        televisionOutputDto.remoteControllerName = television.getRemoteController().getName();
 
         return televisionOutputDto;
 

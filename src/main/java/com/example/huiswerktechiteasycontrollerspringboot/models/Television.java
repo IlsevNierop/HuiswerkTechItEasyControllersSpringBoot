@@ -30,4 +30,7 @@ public class Television {
     private int originalStock;
     private int sold;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private RemoteController remoteController;
+
 }

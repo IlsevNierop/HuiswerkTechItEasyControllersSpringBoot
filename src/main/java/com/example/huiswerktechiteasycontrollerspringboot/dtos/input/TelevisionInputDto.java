@@ -1,5 +1,6 @@
 package com.example.huiswerktechiteasycontrollerspringboot.dtos.input;
 
+import com.example.huiswerktechiteasycontrollerspringboot.models.RemoteController;
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import jakarta.validation.constraints.NotBlank;
@@ -34,6 +35,9 @@ public class TelevisionInputDto {
     public int originalStock;
     @PositiveOrZero(message="Sold needs to be zero or higher, can't be negative")
     public int sold;
+
+
+    public Long remoteControllerId;
 
 
 

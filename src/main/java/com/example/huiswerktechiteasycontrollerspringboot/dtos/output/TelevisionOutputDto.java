@@ -22,6 +22,8 @@ public class TelevisionOutputDto {
     public int originalStock;
     public int sold;
 
+    public String remoteControllerName;
+
     public void copyProperties(Television target){
         BeanUtils.copyProperties(this, target);
     }

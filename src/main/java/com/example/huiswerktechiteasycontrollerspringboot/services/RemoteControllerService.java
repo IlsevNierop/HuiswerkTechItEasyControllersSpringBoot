@@ -1,26 +1,27 @@
 package com.example.huiswerktechiteasycontrollerspringboot.services;
 
 import com.example.huiswerktechiteasycontrollerspringboot.dtos.input.RemoteControllerInputDto;
-import com.example.huiswerktechiteasycontrollerspringboot.dtos.input.WallBracketInputDto;
 import com.example.huiswerktechiteasycontrollerspringboot.dtos.output.RemoteControllerOutputDto;
-import com.example.huiswerktechiteasycontrollerspringboot.dtos.output.WallBracketOutputDto;
 import com.example.huiswerktechiteasycontrollerspringboot.exceptions.RecordNotFoundException;
 import com.example.huiswerktechiteasycontrollerspringboot.models.RemoteController;
-import com.example.huiswerktechiteasycontrollerspringboot.models.WallBracket;
+import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
 import com.example.huiswerktechiteasycontrollerspringboot.repositories.RemoteControllerRepository;
+import com.example.huiswerktechiteasycontrollerspringboot.repositories.TelevisionRepository;
 import org.springframework.stereotype.Service;
 
-import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RemoteControllerService {
 
     private final RemoteControllerRepository remoteControllerRepository;
+    private final TelevisionRepository televisionRepository;
 
-    public RemoteControllerService(RemoteControllerRepository remoteControllerRepository) {
+    public RemoteControllerService(RemoteControllerRepository remoteControllerRepository, TelevisionRepository televisionRepository) {
         this.remoteControllerRepository = remoteControllerRepository;
+        this.televisionRepository = televisionRepository;
     }
 
     public ArrayList<RemoteControllerOutputDto> getAllRemoteControllers() {
@@ -54,6 +55,7 @@ public class RemoteControllerService {
         remoteController.setPrice(remoteControllerInputDto.price);
         remoteController.setOriginalStock(remoteControllerInputDto.originalStock);
 
+
         return remoteController;
 
     }
@@ -66,6 +68,10 @@ public class RemoteControllerService {
         remoteControllerOutputDto.brand = remoteController.getBrand();
         remoteControllerOutputDto.price = remoteController.getPrice();
         remoteControllerOutputDto.originalStock = remoteController.getOriginalStock();
+        if (remoteController.getTelevision() != null) {
+            Television television = televisionRepository.findById(remoteController.getTelevision().getId()).get();
+            remoteControllerOutputDto.televisionName = television.getName();
+        }
 
         return remoteControllerOutputDto;
 
