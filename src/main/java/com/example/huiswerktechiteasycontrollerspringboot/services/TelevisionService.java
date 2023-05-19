@@ -5,15 +5,12 @@ import com.example.huiswerktechiteasycontrollerspringboot.dtos.output.Television
 import com.example.huiswerktechiteasycontrollerspringboot.exceptions.RecordNotFoundException;
 import com.example.huiswerktechiteasycontrollerspringboot.models.RemoteController;
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
+import com.example.huiswerktechiteasycontrollerspringboot.models.WallBracket;
 import com.example.huiswerktechiteasycontrollerspringboot.repositories.RemoteControllerRepository;
 import com.example.huiswerktechiteasycontrollerspringboot.repositories.TelevisionRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.huiswerktechiteasycontrollerspringboot.repositories.WallBracketRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +19,12 @@ public class TelevisionService {
 
     private final TelevisionRepository televisionRepository;
     private final RemoteControllerRepository remoteControllerRepository;
+    private final WallBracketRepository wallBracketRepository;
 
-    public TelevisionService(TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository) {
+    public TelevisionService(TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository, WallBracketRepository wallBracketRepository) {
         this.televisionRepository = televisionRepository;
         this.remoteControllerRepository = remoteControllerRepository;
+        this.wallBracketRepository = wallBracketRepository;
     }
 
     public List<TelevisionOutputDto> getAllTelevisions() throws RecordNotFoundException{
@@ -99,6 +98,15 @@ public class TelevisionService {
         television.setRemoteController(remoteController);
         televisionRepository.save(television);
 
+        return transferTelevisionModelToOutputDto(television);
+    }
+    public TelevisionOutputDto assignWallBracketToTelevision(Long id,Long wallBracketId) {
+        Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television with id " + id + " doesn't exist"));
+        WallBracket wallBracket = wallBracketRepository.findById(wallBracketId).orElseThrow(() -> new RecordNotFoundException("WallBracket with id " + wallBracketId + " doesn't exist"));
+        List<WallBracket> wallBrackets = television.getWallBrackets();
+        wallBrackets.add(wallBracket);
+        television.setWallBrackets(wallBrackets);
+        televisionRepository.save(television);
         return transferTelevisionModelToOutputDto(television);
     }
 
@@ -175,7 +183,15 @@ public class TelevisionService {
             RemoteController remoteController = remoteControllerRepository.findById(televisionInputDto.remoteControllerId).orElseThrow(() -> new RecordNotFoundException("RemoteController with id " + televisionInputDto.remoteControllerId + " doesn't exist"));
             television.setRemoteController(remoteController);
         }
-
+        if (televisionInputDto.wallBracketIds != null) {
+            ArrayList<WallBracket> wallBrackets = new ArrayList<>();
+            for (Long id: televisionInputDto.wallBracketIds
+                 ) {
+                WallBracket wallBracket = wallBracketRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Wallbracket with id " + id + " doesn't exist"));
+                wallBrackets.add(wallBracket);
+            }
+            television.setWallBrackets(wallBrackets);
+        }
         television.setType(televisionInputDto.type);
         television.setBrand(televisionInputDto.brand);
         television.setName(televisionInputDto.name);
@@ -218,6 +234,9 @@ public class TelevisionService {
         }
         if (television.getCiModules() != null) {
             televisionOutputDto.ciModules = television.getCiModules();
+        }
+        if (television.getWallBrackets() != null){
+            televisionOutputDto.wallBrackets = television.getWallBrackets();
         }
 
         return televisionOutputDto;

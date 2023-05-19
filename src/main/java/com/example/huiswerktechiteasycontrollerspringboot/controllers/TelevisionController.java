@@ -70,9 +70,14 @@ public class TelevisionController {
         }
         return new ResponseEntity<>(televisionService.updateTelevision(id, televisionInputDto), HttpStatus.ACCEPTED);
     }
-    @PutMapping("/{id}/{remotecontrollerid}")
+    @PutMapping("/{id}/remotecontroller/{remotecontrollerid}")
     public ResponseEntity<Object> assignRemoteControllerToTelevision(@PathVariable("id") Long id, @PathVariable("remotecontrollerid") Long remoteControllerId) {
         return new ResponseEntity<>(televisionService.assignRemoteControllerToTelevision(id, remoteControllerId), HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/{id}/wallbracket/{wallBracketId}")
+    public ResponseEntity<Object> assignWallBracketToTelevision(@PathVariable("id") Long id, @PathVariable("wallBracketId") Long wallBracketId) {
+        return new ResponseEntity<>(televisionService.assignWallBracketToTelevision(id, wallBracketId), HttpStatus.ACCEPTED);
     }
 
 

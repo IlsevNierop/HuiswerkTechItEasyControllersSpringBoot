@@ -21,6 +21,8 @@ public class WallBracket {
     private String name;
     private double price;
 
+    @ManyToMany(mappedBy = "wallBrackets")
+    private List<Television> televisions;
 
 
 

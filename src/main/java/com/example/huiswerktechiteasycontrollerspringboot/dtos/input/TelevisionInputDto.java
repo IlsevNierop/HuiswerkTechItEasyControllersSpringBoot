@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 
 public class TelevisionInputDto {
 
@@ -35,10 +37,8 @@ public class TelevisionInputDto {
     public int originalStock;
     @PositiveOrZero(message="Sold needs to be zero or higher, can't be negative")
     public int sold;
-
-
     public Long remoteControllerId;
 
-
+    public List<Long> wallBracketIds;
 
 }

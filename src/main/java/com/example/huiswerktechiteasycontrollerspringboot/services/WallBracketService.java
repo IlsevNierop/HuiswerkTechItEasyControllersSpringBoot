@@ -60,6 +60,9 @@ public class WallBracketService {
         wallBracketOutputDto.adjustable = wallBracket.getAdjustable();
         wallBracketOutputDto.name = wallBracket.getName();
         wallBracketOutputDto.price = wallBracket.getPrice();
+        if (wallBracket.getTelevisions() != null){
+            wallBracketOutputDto.televisions = wallBracket.getTelevisions();
+        }
 
         return wallBracketOutputDto;
 

@@ -2,6 +2,7 @@ package com.example.huiswerktechiteasycontrollerspringboot.dtos.output;
 
 import com.example.huiswerktechiteasycontrollerspringboot.models.CIModule;
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
+import com.example.huiswerktechiteasycontrollerspringboot.models.WallBracket;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
@@ -28,5 +29,7 @@ public class TelevisionOutputDto {
     public String remoteControllerName;
 
     public List<CIModule> ciModules;
+
+    public List<WallBracket> wallBrackets;
 
 }

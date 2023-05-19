@@ -42,5 +42,12 @@ public class Television {
     @JsonIgnore
     private List<CIModule> ciModules;
 
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(name = "television_wallbracket",
+            joinColumns = @JoinColumn(name = "television_id"),
+            inverseJoinColumns = @JoinColumn(name = "wallbracket_id"))
+    private List<WallBracket> wallBrackets;
+
 
 }
