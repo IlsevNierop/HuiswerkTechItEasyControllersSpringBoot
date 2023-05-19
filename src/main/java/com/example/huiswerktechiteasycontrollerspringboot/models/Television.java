@@ -1,5 +1,7 @@
 package com.example.huiswerktechiteasycontrollerspringboot.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +33,7 @@ public class Television {
     private int sold;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("television")
     private RemoteController remoteController;
 
 }
