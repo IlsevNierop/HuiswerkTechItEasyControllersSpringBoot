@@ -1,7 +1,10 @@
 package com.example.huiswerktechiteasycontrollerspringboot.dtos.output;
 
+import com.example.huiswerktechiteasycontrollerspringboot.models.CIModule;
 import com.example.huiswerktechiteasycontrollerspringboot.models.Television;
 import org.springframework.beans.BeanUtils;
+
+import java.util.List;
 
 public class TelevisionOutputDto {
 
@@ -24,7 +27,6 @@ public class TelevisionOutputDto {
 
     public String remoteControllerName;
 
-    public void copyProperties(Television target){
-        BeanUtils.copyProperties(this, target);
-    }
+    public List<CIModule> ciModules;
+
 }

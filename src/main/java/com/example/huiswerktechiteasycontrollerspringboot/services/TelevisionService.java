@@ -216,6 +216,9 @@ public class TelevisionService {
         if (television.getRemoteController() != null) {
             televisionOutputDto.remoteControllerName = television.getRemoteController().getName();
         }
+        if (television.getCiModules() != null) {
+            televisionOutputDto.ciModules = television.getCiModules();
+        }
 
         return televisionOutputDto;
 

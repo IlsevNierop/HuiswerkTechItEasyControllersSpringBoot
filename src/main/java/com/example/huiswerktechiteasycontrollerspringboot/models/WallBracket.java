@@ -1,8 +1,11 @@
 package com.example.huiswerktechiteasycontrollerspringboot.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,6 +20,9 @@ public class WallBracket {
     private Boolean adjustable;
     private String name;
     private double price;
+
+
+
 
 
 }

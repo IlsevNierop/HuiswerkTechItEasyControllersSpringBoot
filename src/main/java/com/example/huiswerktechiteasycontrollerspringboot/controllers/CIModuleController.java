@@ -41,6 +41,11 @@ public class CIModuleController {
         return ResponseEntity.created(uri).body(ciModuleOutputDto);
     }
 
+    @PutMapping ("/{id}/{televisionId}")
+    public  ResponseEntity<CIModuleOutputDto> assignTelevisionToCIModule(@PathVariable Long id, @PathVariable Long televisionId){
+        return new ResponseEntity<>(ciModuleService.assignTelevisionToCIModule(id, televisionId), HttpStatus.ACCEPTED);
+    }
+
     public String errorToStringHandling (BindingResult bindingResult){
         StringBuilder sb = new StringBuilder();
         for (FieldError fe : bindingResult.getFieldErrors()){

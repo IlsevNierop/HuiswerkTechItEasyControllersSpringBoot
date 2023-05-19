@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 @Entity
 @Table(name = "televisions")
 @Getter
@@ -35,5 +37,10 @@ public class Television {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties("television")
     private RemoteController remoteController;
+
+    @OneToMany (mappedBy = "television")
+    @JsonIgnore
+    private List<CIModule> ciModules;
+
 
 }
