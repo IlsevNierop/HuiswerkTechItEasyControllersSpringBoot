@@ -57,3 +57,19 @@ VALUES (103, '42-80 inch', true, 'Articulating Wall Mount', 79.99);
 
 INSERT INTO wall_brackets (id, size, adjustable, name, price)
 VALUES (104, '37-63 inch', true, 'Swivel TV Mount Bracket', 49.99);
+
+INSERT INTO users (username, password, enabled, email, apiKey)
+VALUES ('ilsetest', '$2a$12$GJ/wE1EjOA/Jp/7YvAs2EeHA8/NieoDfqUke7DQFY2Y46r3JpQcGC', true, 'ilse@gmail.com', 'randomkey');
+
+INSERT INTO users (username, password, enabled, email, apiKey)
+VALUES ('testilse', '$2a$12$X1pz6qNxvpCRqAUi9BuPBuJkc5utLdf5lIERbZ5.wsYWZL0aaholG', true, 'ilse@hotmail.com', 'randomkeyehteh');
+
+
+INSERT INTO authorities (username, authority)
+VALUES ('ilsetest', 'ROLE_USER');
+
+INSERT INTO authorities (username, authority)
+VALUES ('testilse', 'ROLE_USER');
+
+INSERT INTO authorities (username, authority)
+VALUES ('ilsetest', 'ROLE_ADMIN');
